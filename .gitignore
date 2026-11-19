@@ -1,0 +1,48 @@
+# dependências
+node_modules/
+.pnpm-store/
+.venv/
+__pycache__/
+*.pyc
+
+# builds
+dist/
+build/
+out/
+.next/
+.astro/
+.svelte-kit/
+.vercel/
+.output/
+coverage/
+*.tsbuildinfo
+
+# testes / relatórios
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+.lighthouseci/
+lighthouse-report*
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ambiente e segredos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# editor / SO
+.DS_Store
+Thumbs.db
+.idea/
+*.log
+npm-debug.log*
+
+# estado local de agentes
+.cursor/*
+!.cursor/skills/
+!.cursor/rules/

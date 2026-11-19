@@ -1,0 +1,54 @@
+# CI — roda os mesmos portões de qualidade do harness local (gates.sh).
+# Ajuste a versão do Node/Python conforme o plan.md da feature.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        if: hashFiles('package.json') != ''
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        if: hashFiles('pyproject.toml') != ''
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v5
+        if: hashFiles('uv.lock') != ''
+
+      - name: Playwright browsers
+        if: hashFiles('playwright.config.*') != ''
+        run: npm ci && npx playwright install --with-deps chromium
+
+      - name: Portões de qualidade
+        run: bash scripts/gates.sh . gates-out
+
+      - name: Relatório dos portões
+        if: always()
+        run: cat gates-out/gates.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gates
+          path: gates-out/
+

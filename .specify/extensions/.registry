@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "extensions": {
+    "git": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:89711dec9716473fba4afc54f7224bcb28ebd3c55fb5aaa30df854ab02b07a75",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "cursor-agent": [
+          "speckit.git.feature",
+          "speckit.git.validate",
+          "speckit.git.remote",
+          "speckit.git.initialize",
+          "speckit.git.commit"
+        ]
+      },
+      "registered_skills": [],
+      "installed_at": "2026-11-19T17:19:20.910868+00:00"
+    },
+    "harness": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:a3e746c50436226dc25a424d8424b9036bbfcda8ad0ee090a661038466efea13",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "cursor-agent": [
+          "speckit.harness.init",
+          "speckit.harness.explore",
+          "speckit.harness.verify",
+          "speckit.harness.status",
+          "speckit.harness.report"
+        ]
+      },
+      "registered_skills": [],
+      "installed_at": "2026-11-19T17:19:20.943048+00:00"
+    }
+  }
+}
